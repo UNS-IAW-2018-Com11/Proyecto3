@@ -65,7 +65,15 @@
 					<h2>Active Tournaments</h2>
 					<div class="list-group" id="torneosactivos">
 
-
+						@foreach($torneos as $t)
+						<a onclick="" href="/Proyecto3/public/{{$t->nombre}}" class="list-group-item">
+							<h4 class="list-group-item-heading">{{$t->nombre}}</h4>
+							<p class="descripcion">{{$t->formato}}</p>
+							<div class="torneo_slogan" style="padding-right: 0px;">
+								<img src="images/liga.png" class="img-responsive">
+							</div>
+						</a>
+						@endforeach
 					</div>
 				</div>
 			</div>

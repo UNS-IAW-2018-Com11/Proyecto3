@@ -12,7 +12,7 @@
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="../stylesheets/estilo.css">
-<title>Tournament creator v2.0</title>
+<title>Tournament creator v3.0</title>
 </head>
 <body>
 	<nav class="navbar  navbar-expand-lg fixed-top">
@@ -58,45 +58,54 @@
 												</tr>
 											</thead>
 											<tbody id="table-posiciones">
-											{{#each equipos as |item index|}}
-												<tr><td>{{inc @index}}</td><td><a href="/team/{{this.nombre}}" onclick="">{{this.nombre}}</a></td><td>{{this.GP}}</td><td>{{this.W}}</td><td>{{this.L}}</td><td>{{this.PF}}</td><td>{{this.PC}}</td><td>{{this.Pts}}</td></tr>
-											{{/each}}
+												@foreach($teams as $index => $team)
+												<tr><td>{{$index+1}}</td><td><a href="/team/{{$team}}" onclick="">{{$team->nombre}}</a></td><td>{{$team->GP}}</td><td>{{$team->W}}</td><td>{{$team->L}}</td><td>{{$team->PF}}</td><td>{{$team->PC}}</td><td>{{$team->Pts}}</td></tr>
+												@endforeach
 											</table>
 									</div>
 								</div>
 							</div>
+
+
 							<div class="col-1"></div>
 							<div class="col-6">
 								<!-- ACA VAN LOS PARTIDOS -->
 								<div class="row">
-							   <table class="table table-hover table-condensed border" id="table-partidos">
-							    	{{#each fechas}}
-								   <thead>
-							         <tr>
-							            <th colspan="3">Fecha {{inc @index}} : {{this.fecha}}</th>
-							         </tr>
-							      </thead>
-							      <tbody>
-									  {{#each this.partidos}}
-							         <tr>
-							            <td align="left"><a href="/equipo" onclick="">{{this.local}}
-										{{#ifCond this.estado "finalizado"}}
-											({{this.puntosLocal}})
-										{{/ifCond}}
+								 <table class="table table-hover table-condensed border" id="table-partidos">
+											@foreach($fechas as $index => $fecha)
+									 <thead>
+											 <tr>
+													<th colspan="3">Fecha {{$index+1}} : {{$fecha->fecha}}</th>
+											 </tr>
+										</thead>
+										<tbody>
+								 	 @foreach($fecha->partidos as $partido)
+									 	@foreach($partidoss as $part)
+											@if($part->_id == $partido)
+											 <tr>
+													<td align="left"><a href="/equipo" onclick="">{{$part->local}}
+										@if($part->estado === "finalizado")
+											({{$part->puntosLocal}})
+										@endif
 										</a></td>
-							            <td align="center">vs</td>
-							            <td align="right"><a href="/equipo" onclick="">
-										{{#ifCond this.estado "finalizado"}}
-											({{this.puntosVisitante}})
-										{{/ifCond}}
-										{{this.visitante}}</a></td>
-							         </tr>
-									  {{/each}}
-							      </tbody>
-								   {{/each}}
-							   </table>
+													<td align="center">vs</td>
+													<td align="right"><a href="/equipo" onclick="">
+
+									@if($part->estado === "finalizado")
+											({{$part->puntosVisitante}})
+											@endif
+										{{$part->visitante}}</a></td>
+										@endif
+										@endforeach
+											 </tr>
+										@endforeach
+										</tbody>
+									 @endforeach
+								 </table>
 								</div>
 							</div>
+
+
 						</div>
 					</div>
 				</div>
@@ -109,8 +118,8 @@
 		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-		<!-- <script src="scripts/fixture.js"></script> -->
-		<script src="../javascripts/toggleMode.js"></script>
+		<!-- <script src="scripts/fixture.js"></script>
+		<script src="../javascripts/toggleMode.js"></script>  -->
 		</div>
 	</body>
 </html>
