@@ -20,10 +20,12 @@ use App\Testmongodb;
     return $collection->find()->toArray();
 });*/
 
-Route::get('/', 'Index@show_torneos')->name('index');
+Route::get('/', 'VisitorController@show_torneos')->name('index');
 
-Route::get('/contact', 'PageController@contact')->name('contact');
+Route::get('/contact', 'VisitorController@contact')->name('contact');
 
-Route::get('/{id}', 'Team@show_teams')->name('torneo');
+Route::get('/{id}', 'VisitorController@show_teams')->name('torneo');
+
+Route::get('/team', 'VisitorController@team_info()')->name('team');
 
 ?>

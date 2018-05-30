@@ -20,7 +20,7 @@
 <body>
 	<nav class="navbar  navbar-expand-lg fixed-top">
 		<a class="navbar-brand" href="/"> <img
-			src="images/liga.png" width="30" height="30" alt="">
+			src="{{asset('images/liga.png')}}" width="30" height="30" alt="">
 			Tournament Generator
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -54,6 +54,7 @@
 								<!-- ACA VA LA TABLA DE JUGADORES -->
 								<div style="display: block;">
 									<div class="row">
+										<h1>WTF</h1>
 										<table class="table table-hover table-condensed border">
 											<thead>
 												<tr>
@@ -64,16 +65,14 @@
 												</tr>
 											</thead>
 											<tbody id="table-posiciones">
-												{{#each jugadores}}
 												<tr>
-													<td>{{../equipo}}</td>
+													<td>{{$team->nombre}}</td>
 													<td>
-														<a>{{this.nombre}}</a>
+														<a>{{jugador['nombre']}}</a>
 													</td>
-													<td>{{this.DNI}}</td>
-													<td>{{this.edad}}</td>
+													<td>{{jugador['DNI']}}</td>
+													<td>{{jugador['edad']}}</td>
 												</tr>
-												{{/each}}
 											</tbody>
 										</table>
 									</div>

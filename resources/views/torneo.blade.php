@@ -16,14 +16,14 @@
 </head>
 <body>
 	<nav class="navbar  navbar-expand-lg fixed-top">
-		<a class="navbar-brand" href="/"> <img src="../images/liga.png" alt="" width="30" height="30"> Tournament Generator
+		<a class="navbar-brand" href="{{route('index')}}"> <img src="{{asset('images/liga.png')}}" alt="" width="30" height="30"> Tournament Generator
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link" href="/">Home <span class="sr-only">(current)</span>
+				<li class="nav-item active"><a class="nav-link" href="{{route('index')}}">Home <span class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item"><a class="nav-link" href="" onclick="alert('Tournament Generator IAW 2018 Beta')">About</a></li>
 				<li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
@@ -59,7 +59,7 @@
 											</thead>
 											<tbody id="table-posiciones">
 												@foreach($teams as $index => $team)
-												<tr><td>{{$index+1}}</td><td><a href="/team/{{$team}}" onclick="">{{$team->nombre}}</a></td><td>{{$team->GP}}</td><td>{{$team->W}}</td><td>{{$team->L}}</td><td>{{$team->PF}}</td><td>{{$team->PC}}</td><td>{{$team->Pts}}</td></tr>
+												<tr><td>{{$index+1}}</td><td><a href="{{route('team',['id'=>$team->nombre])}}" onclick="">{{$team->nombre}}</a></td><td>{{$team->GP}}</td><td>{{$team->W}}</td><td>{{$team->L}}</td><td>{{$team->PF}}</td><td>{{$team->PC}}</td><td>{{$team->Pts}}</td></tr>
 												@endforeach
 											</table>
 										</div>
