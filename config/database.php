@@ -54,7 +54,7 @@ return [
             'engine' => null,
         ],
 
-        'mongodb' => [
+        /*'mongodb' => [
             'driver'   => 'mongodb',
             'host'     => env('DB_HOST', 'localhost'),
             'port'     => env('MONGO_DB_PORT', ''),
@@ -62,6 +62,18 @@ return [
           //  'host' => 'localhost',
           //  'port' => 27017,
           //  'database' => 'torneos'
+        ],*/
+
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'host'     => env('MONGODB_HOST'),
+            'port'     => env('MONGODB_PORT'),
+            'username' => env('MONGODB_USERNAME'),
+            'password' => env('MONGODB_PASSWORD'),
+            'database' => env('MONGODB_DATABASE'),
+            'options' => [
+               'database' =>  env('MONGODB_DATABASE')
+            ]
         ],
 
         'pgsql' => [

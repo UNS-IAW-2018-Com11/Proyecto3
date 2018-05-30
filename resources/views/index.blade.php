@@ -23,7 +23,7 @@
 
 	<nav class="navbar  navbar-expand-lg fixed-top">
 		<a class="navbar-brand" href=""> <img
-			src="images/liga.png" width="30" height="30" alt="">
+			src="{{asset('images/liga.png')}}" width="30" height="30" alt="">
 			Tournament Generator
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -70,7 +70,7 @@
 							<h4 class="list-group-item-heading">{{$t->nombre}}</h4>
 							<p class="descripcion">{{$t->formato}}</p>
 							<div class="torneo_slogan" style="padding-right: 0px;">
-								<img src="images/liga.png" class="img-responsive">
+								<img src="{{asset('images/liga.png')}}" class="img-responsive">
 							</div>
 						</a>
 						@endforeach

@@ -1,18 +1,18 @@
 <!doctype html>
 <html lang="en">
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="../stylesheets/estilo.css">
-<title>Tournament creator v3.0</title>
+	<link rel="stylesheet" type="text/css" href="{{asset('css/estilo.css')}}">
+	<title>Tournament creator v3.0</title>
 </head>
 <body>
 	<nav class="navbar  navbar-expand-lg fixed-top">
@@ -62,64 +62,62 @@
 												<tr><td>{{$index+1}}</td><td><a href="/team/{{$team}}" onclick="">{{$team->nombre}}</a></td><td>{{$team->GP}}</td><td>{{$team->W}}</td><td>{{$team->L}}</td><td>{{$team->PF}}</td><td>{{$team->PC}}</td><td>{{$team->Pts}}</td></tr>
 												@endforeach
 											</table>
+										</div>
 									</div>
 								</div>
-							</div>
 
 
-							<div class="col-1"></div>
-							<div class="col-6">
-								<!-- ACA VAN LOS PARTIDOS -->
-								<div class="row">
-								 <table class="table table-hover table-condensed border" id="table-partidos">
-											@foreach($fechas as $index => $fecha)
-									 <thead>
-											 <tr>
-													<th colspan="3">Fecha {{$index+1}} : {{$fecha->fecha}}</th>
-											 </tr>
-										</thead>
-										<tbody>
-								 	 @foreach($fecha->partidos as $partido)
-									 	@foreach($partidoss as $part)
-											@if($part->_id == $partido)
-											 <tr>
-													<td align="left"><a href="/equipo" onclick="">{{$part->local}}
-										@if($part->estado === "finalizado")
-											({{$part->puntosLocal}})
-										@endif
-										</a></td>
+								<div class="col-1"></div>
+
+
+								<div class="col-6">
+									<!-- ACA VAN LOS PARTIDOS -->
+									<div class="row">
+										<table class="table table-hover table-condensed border" id="table-partidos">
+											@foreach($fechas as $fecha)
+											<thead>
+												<tr>
+													<th colspan="3">Fecha {{$fecha->fecha}}</th>
+												</tr>
+											</thead>
+											<tbody>
+												@foreach($fecha->partidos as $partido)
+												<tr>
+													<td align="left"><a href="/equipo" onclick="">{{$partido['local']}}
+														@if($partido['estado'] === "finalizado")
+														({{$partido['puntosLocal']}})
+														@endif
+													</a></td>
 													<td align="center">vs</td>
 													<td align="right"><a href="/equipo" onclick="">
 
-									@if($part->estado === "finalizado")
-											({{$part->puntosVisitante}})
-											@endif
-										{{$part->visitante}}</a></td>
-										@endif
-										@endforeach
-											 </tr>
-										@endforeach
-										</tbody>
-									 @endforeach
-								 </table>
+														@if($partido['estado'] === "finalizado")
+														({{$partido['puntosVisitante']}})
+														@endif
+														{{$partido['visitante']}}</a></td>
+													</tr>
+													@endforeach
+												</tbody>
+												@endforeach
+											</table>
+										</div>
+									</div>
+
+
 								</div>
 							</div>
-
-
 						</div>
 					</div>
+					<div class="col-lg-1 sidenav IAWbanner"></div>
 				</div>
-			</div>
-			<div class="col-lg-1 sidenav IAWbanner"></div>
-		</div>
 
-		<!-- Optional JavaScript -->
-		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-		<!-- <script src="scripts/fixture.js"></script>
-		<script src="../javascripts/toggleMode.js"></script>  -->
-		</div>
-	</body>
-</html>
+				<!-- Optional JavaScript -->
+				<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+				<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+				<!-- <script src="scripts/fixture.js"></script>
+				<script src="{{asset('js/toggleMode.js')}}"></script>-->
+			</div>
+		</body>
+		</html>
