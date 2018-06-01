@@ -7,8 +7,7 @@ function confirm_team(){
   $('#formequipo input').each(function() {
     var input = $(this);
     equipo = input.val();
-});
-
+  });
 
   var json_equipo = {
     nombre:equipo,
@@ -56,7 +55,6 @@ function confirm_team(){
 
     console.log(json_equipo);
 
-
     // construct an HTTP request
     var xhr = new XMLHttpRequest();
 
@@ -101,7 +99,8 @@ function confirm_team(){
   }
 
   function insertTeams(){
-    // construct an HTTP request
+    window.location = "../../../../";
+  /*  // construct an HTTP request
     var xhr = new XMLHttpRequest();
 
     xhr.onreadystatechange = function() { // listen for state changes
@@ -116,5 +115,5 @@ function confirm_team(){
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
 
     // send data
-    xhr.send('');
+    xhr.send('');*/
   }

@@ -50,7 +50,7 @@
 			<button class="btn btn-primary normal-mode" id="toggleButton"
 				type="submit" onclick="toggleMode()">Dark Mode</button>
 
-			<a class="btn btn-primary" href="/auth/login">Login</a>
+			<a class="btn btn-primary" href="{{route('admin')}}">Login</a>
 			<!--	<button class="btn btn-primary" type="submit">Login</button>-->
 
 		</div>

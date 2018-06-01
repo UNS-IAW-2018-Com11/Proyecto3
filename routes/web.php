@@ -1,6 +1,5 @@
 <?php
 use App\Testmongodb;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,8 +23,15 @@ Route::get('/', 'VisitorController@show_torneos')->name('index');
 
 Route::get('/contact', 'VisitorController@contact')->name('contact');
 
-Route::get('/{id}', 'VisitorController@show_teams')->name('torneo');
+Route::get('/torneos/{id}', 'VisitorController@show_teams')->name('torneo');
 
-Route::get('/team', 'VisitorController@team_info()')->name('team');
+Route::get('/team/{id}', 'VisitorController@team_info')->name('team');
 
+Route::get('/admin', 'AdminController@tournament_details')->name('admin');
+
+Route::get('/admin/new-tournament', 'AdminController@new_tournament')->name('new_tourney');
+
+Route::get('/admin/{tname}/{format}/{maxp}/{teams}', 'AdminController@add_teams')->name('add_teams');
+
+Route::post('/add-teams', 'AdminController@add_team_toDB')->name('add_team_DB');
 ?>

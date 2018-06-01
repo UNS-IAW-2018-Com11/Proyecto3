@@ -11,15 +11,15 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="../stylesheets/estilo.css">
+<link rel="stylesheet" type="text/css" href="{{asset('css/estilo.css')}}">
 <link rel="stylesheet" type="text/css"
-	href="../stylesheets/footer-basic-centered.css">
-<link rel="stylesheet" type="text/css" href="../stylesheets/demo.css">
+	href="{{asset('css/footer-basic-centered.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('css/demo.css')}}">
 <title>Tournament creator v1.0</title>
 </head>
 <body>
 	<nav class="navbar  navbar-expand-lg fixed-top">
-		<a class="navbar-brand" href="/"> <img
+		<a class="navbar-brand" href="{{route('index')}}"> <img
 			src="{{asset('images/liga.png')}}" width="30" height="30" alt="">
 			Tournament Generator
 		</a>
@@ -32,10 +32,10 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active"><a class="nav-link"
-					href="/">Home <span class="sr-only">(current)</span>
+					href="{{route('index')}}">Home <span class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item"><a class="nav-link" style="color: white" onclick="alert('Tournament Generator IAW 2018 Beta')">About</a></li>
-				<li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+				<li class="nav-item"><a class="nav-link" href="{{route('contact')}}">Contact</a></li>
 			</ul>
 			<button class="btn btn-primary normal-mode" id="toggleButton"
 				type="submit" onclick="toggleMode()">Dark Mode</button>
@@ -54,7 +54,6 @@
 								<!-- ACA VA LA TABLA DE JUGADORES -->
 								<div style="display: block;">
 									<div class="row">
-										<h1>WTF</h1>
 										<table class="table table-hover table-condensed border">
 											<thead>
 												<tr>
@@ -65,14 +64,16 @@
 												</tr>
 											</thead>
 											<tbody id="table-posiciones">
+												@foreach ($team->jugadores as $jugador)
 												<tr>
 													<td>{{$team->nombre}}</td>
 													<td>
-														<a>{{jugador['nombre']}}</a>
+														<a>{{$jugador['nombre']}}</a>
 													</td>
-													<td>{{jugador['DNI']}}</td>
-													<td>{{jugador['edad']}}</td>
+													<td>{{$jugador['DNI']}}</td>
+													<td>{{$jugador['edad']}}</td>
 												</tr>
+												@endforeach
 											</tbody>
 										</table>
 									</div>
