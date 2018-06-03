@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
+      //  'http://localhost/Proyecto3/public/add-teams'
         //
     ];
 }

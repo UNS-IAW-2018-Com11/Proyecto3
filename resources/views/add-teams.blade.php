@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet"
@@ -83,6 +84,7 @@
 									</div>
 									<div id="form-div" class="container">
 										<form action="" id="modalForm" name="modalF">
+        						{{ csrf_field() }}
 											@for ($i = 0; $i < $maxp; $i++)
 											<div class="jugador">
 												<div class="form-row">

@@ -58,13 +58,17 @@ function confirm_team(){
     // construct an HTTP request
     var xhr = new XMLHttpRequest();
 
-    var URL = '/add-teams';
+    var URL = '../../../../add-teams';
     xhr.open('POST', URL, true);
-
     xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-
+    var token = $("meta[name='csrf-token']").attr("content");
+    console.log(token);
+    xhr.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr("content"));
+    
     // send the collected data as JSON
     xhr.send(JSON.stringify(json_equipo));
+    console.log(xhr);
+
 
     closeAfterConfirm(equipo);
   }

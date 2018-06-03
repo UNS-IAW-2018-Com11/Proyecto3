@@ -28,7 +28,7 @@ class AdminController extends Controller
     }
 
     public function add_team_toDB(Request $request){
-          dd($request);
-      return 'hola pa';
+
+     return Request::post();
     }
 }
