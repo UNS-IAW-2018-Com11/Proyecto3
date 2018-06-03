@@ -83,6 +83,25 @@
 										</form>
 									</div>
 									<div id="form-div" class="container">
+										@if(count($errors)>0)
+										  @foreach($errors->all() as $error)
+										    <div class="alert alert-danger">
+										      {{$error}}
+										    </div>
+										  @endforeach
+										@endif
+
+										@if(session('success'))
+										  <div class="alert alert-success">
+										    {{session('success')}}
+										  </div>
+										@endif
+
+										@if(session('error'))
+										  <div class="alert alert-danger">
+										    {{session('error')}}
+										  </div>
+										@endif
 										<form action="" id="modalForm" name="modalF">
         						{{ csrf_field() }}
 											@for ($i = 0; $i < $maxp; $i++)
@@ -108,7 +127,7 @@
 										</div>
 										<div class="modal-footer">
 											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-											<button type="button" class="btn btn-primary" onclick=confirm_team()>Confirm</button>
+											<button type="button" class="btn btn-primary" onclick=confirm_team('{{$format}}','{{$teams}}','{{$maxp}}')>Confirm</button>
 										</div>
 									</div>
 								</div>

@@ -33,5 +33,7 @@ Route::get('/admin/new-tournament', 'AdminController@new_tournament')->name('new
 
 Route::get('/admin/{tname}/{format}/{maxp}/{teams}', 'AdminController@add_teams')->name('add_teams');
 
-Route::post('/add-teams', 'AdminController@add_team_toDB')->name('add_team_DB');
+Route::post('/add-teams', 'AdminController@add_team_toDB');
+
+Route::post('/add-tournament', 'AdminController@add_tournament');
 ?>

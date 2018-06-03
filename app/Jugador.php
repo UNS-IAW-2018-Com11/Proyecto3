@@ -4,8 +4,8 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Testmongodb extends Eloquent{
+class Jugador extends Eloquent{
   protected $connection = 'mongodb';
-  protected $collection = 'equiposmodels';
+  protected $collection = 'jugadoresmodels';
 
 }
