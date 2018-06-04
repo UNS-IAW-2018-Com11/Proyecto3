@@ -166,5 +166,16 @@ class AdminController extends Controller
     return $round;
 }
 
+public function editor(){
+  $torneos = Torneos::all();
+  return view('editor')->with('torneos',$torneos);
+}
+
+public function editor_partidos(Request $request){
+  $id = $request->input('id');
+  $fechas = Fecha::where('torneo', $id)->get();
+  info($fechas);
+  return view('editor')->with('fechas',$fechas);
+}
 
 }

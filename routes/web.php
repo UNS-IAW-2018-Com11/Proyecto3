@@ -33,6 +33,10 @@ Route::get('/admin/new-tournament', 'AdminController@new_tournament')->name('new
 
 Route::get('/admin/{tname}/{format}/{maxp}/{teams}', 'AdminController@add_teams')->name('add_teams');
 
+Route::get('editor', 'AdminController@editor')->name('editor');
+
+Route::get('editor/{id}', 'AdminController@editor_partidos')->name('editor_partidos');
+
 Route::post('/add-teams', 'AdminController@add_team_toDB');
 
 Route::post('/add-tournament', 'AdminController@add_tournament');
