@@ -7,6 +7,7 @@ use App\Torneos;
 use App\Equipos;
 use App\Fecha;
 use App\Jugador;
+use App\Partido;
 
 
 
@@ -29,16 +30,53 @@ class AdminController extends Controller
   }
 
   private function add_schedule(&$nombre_torneo){
-    $teams = Equipos::all()->where('torneo', "$nombre_torneo");
-//    $equipos = [];
-//    for($i = 0;$i < count($teams); $i++){
-//      array_push($equipos,$teams[$i]['nombre']);
-//    }
-    info($teams);
-    return $teams;
-    //return $equipos;
-  }
+    $teams = Equipos::where('torneo', $nombre_torneo)->get();
+    $equipos = array();
 
+
+    for($i = 0;$i < count($teams); $i++){
+      array_push($equipos, $teams[$i]->nombre);
+    }
+
+    $rounds = $this->roundRobin($equipos);
+
+    $fechas = array();
+    foreach($rounds as $index => $games){
+      $partidos = array();
+      foreach($games as $play){
+        $partido = array(
+          'local' => $play["Home"],
+          'visitante' => $play["Away"],
+          'puntosLocal' => 0,
+          'puntosVisitante' => 0,
+          'estado' => 'pendiente'
+        );
+        array_push($partidos, $partido);
+        $part = new Partido();
+        $part->local = $play["Home"];
+        $part->visitante = $play["Away"];
+        $part->puntosLocal = 0;
+        $part->puntosVisitante = 0;
+        $part->estado = 'pendiente';
+
+        $part->save();
+      }
+    /*  $fecha = array(
+              'fecha' => $index+1,
+              'torneo' => $nombre_torneo,
+              'partidos' => $partidos
+      );
+      array_push($fechas, $fecha);*/
+      $fecha = new Fecha();
+      $fecha->fecha = $index+1;
+      $fecha->torneo = $nombre_torneo;
+      $fecha->partidos = $partidos;
+
+      $fecha->save();
+    }
+
+
+  }
 
   public function add_tournament(Request $request){
     $nombre = $request->tname;
@@ -106,7 +144,7 @@ class AdminController extends Controller
  * @return    $array
  *
  */
- /*private function roundRobin( array $teams ){
+ private function roundRobin( array $teams ){
 
     $away = array_splice($teams,(count($teams)/2));
     $home = $teams;
@@ -127,6 +165,6 @@ class AdminController extends Controller
     }
     return $round;
 }
-*/
+
 
 }

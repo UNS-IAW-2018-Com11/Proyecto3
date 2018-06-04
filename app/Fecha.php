@@ -8,10 +8,4 @@ class Fecha extends Eloquent{
   protected $connection = 'mongodb';
   protected $collection = 'fechasmodels';
 
-
-  public function partido()
-  {
-      return $this->hasMany('App\Partido');
-  }
-
 }

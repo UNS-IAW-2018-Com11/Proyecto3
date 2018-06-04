@@ -8,8 +8,4 @@ class Partido extends Eloquent{
   protected $connection = 'mongodb';
   protected $collection = 'partidosmodels';
 
-public function fechas(){
-  return $this->belongsTo('App\Fecha');
-}
-
 }
