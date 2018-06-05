@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet"
@@ -76,22 +77,22 @@
 						<tbody>
 							@foreach ($fecha->partidos as $partido)
 							<tr>
-								<td align="left"><a>{{$partido->local}}
-									@if ($partido->estado === "finalizado")
-									{{$partido->puntosLocal}}
+								<td align="left"><a>{{$partido['local']}}
+									@if ($partido['estado'] === "finalizado")
+									{{$partido['puntosLocal']}}
 									@endif
 								</a></td>
 								<td align="center"><input type="number" name="local" max="999"></td>
 								<td align="center">
 									<button type="button" class="btn btn-info"
-									onclick='edit("{{$partido->local}}","{{$partido->visitante}}")'> Edit</button>
+									onclick='edit("{{$partido['local']}}","{{$partido['visitante']}}","{{$fecha->torneo}}","{{$fecha->fecha}}")'> Edit</button>
 								</td>
 								<td align="center"><input type="number" name="visitante" max="999"></td>
 								<td align="right"><a>
-									@if ($partido->estado === "finalizado")
-									{{$partido->puntosVisitante}}
+									@if ($partido['estado'] === "finalizado")
+									{{$partido['puntosVisitante']}}
 									@endif
-									{{$partido->visitante}}</a></td>
+									{{$partido['visitante']}}</a></td>
 								</tr>
 								@endforeach
 							</tbody>

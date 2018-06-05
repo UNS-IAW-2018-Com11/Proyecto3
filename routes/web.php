@@ -40,4 +40,6 @@ Route::get('editor/{id}', 'AdminController@editor_partidos')->name('editor_parti
 Route::post('/add-teams', 'AdminController@add_team_toDB');
 
 Route::post('/add-tournament', 'AdminController@add_tournament');
+
+Route::post('/editor/update', 'AdminController@edit_match');
 ?>

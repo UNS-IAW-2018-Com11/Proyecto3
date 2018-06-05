@@ -26,17 +26,20 @@ function edit(local, visitante, torneo, fecha){
   obj.puntosLocal = x[row].cells[1].firstChild.value;
   obj.puntosVisitante = x[row].cells[3].firstChild.value;
   obj.fecha = fecha;
+  obj.torneo = torneo;
+
+  console.log(obj);
 
   //POST
   // construct an HTTP request
   var xhr = new XMLHttpRequest();
 
-  var URL = '/editor/update';
+  var URL = '../editor/update';
   xhr.open('POST', URL, true);
 
   xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+  xhr.setRequestHeader('X-CSRF-Token', $("meta[name='csrf-token']").attr("content"));
 
   // send the collected data as JSON
   xhr.send(JSON.stringify(obj));
-
 }

@@ -9,10 +9,7 @@ use App\Fecha;
 use App\Jugador;
 use App\Partido;
 
-
-
-class AdminController extends Controller
-{
+class AdminController extends Controller{
 
   private $nombre_torneo;
 
@@ -61,109 +58,101 @@ class AdminController extends Controller
 
         $part->save();
       }
-    /*  $fecha = array(
-              'fecha' => $index+1,
-              'torneo' => $nombre_torneo,
-              'partidos' => $partidos
-      );
-      array_push($fechas, $fecha);*/
-      $fecha = new Fecha();
-      $fecha->fecha = $index+1;
-      $fecha->torneo = $nombre_torneo;
-      $fecha->partidos = $partidos;
+      /*  $fecha = array(
+      'fecha' => $index+1,
+      'torneo' => $nombre_torneo,
+      'partidos' => $partidos
+    );
+    array_push($fechas, $fecha);*/
+    $fecha = new Fecha();
+    $fecha->fecha = $index+1;
+    $fecha->torneo = $nombre_torneo;
+    $fecha->partidos = $partidos;
 
-      $fecha->save();
-    }
+    $fecha->save();
+  }
+}
 
+public function add_tournament(Request $request){
+  $nombre = $request->tname;
 
+  $torneo = new Torneos();
+  $torneo->nombre = $nombre;
+  $torneo->formato = $request->format;
+  $torneo->cantPlayers = $request->maxp;
+  $torneo->cantTeams = $request->teams;
+  $torneo->estado = 'activo';
+
+  $torneo->save();
+
+  $this->add_schedule($nombre);
+}
+
+public function add_teams($tname, $format, $maxp, $teams){
+  return view('add-teams')
+  ->with('tname', $tname)
+  ->with('format', $format)
+  ->with('maxp', $maxp)
+  ->with('teams', $teams);
+}
+
+public function add_team_toDB(Request $request){
+  $equipo = new Equipos();
+  $equipo->nombre = $request->nombre;
+  $equipo->GP = $request->GP;
+  $equipo->W = $request->W;
+  $equipo->L = $request->L;
+  $equipo->PF = $request->PF;
+  $equipo->PC = $request->PC;
+  $equipo->Pts = $request->Pts;
+  $equipo->torneo = $request->torneo;
+  $equipo->jugadores = $request->jugadores;
+
+  $this->nombre_torneo = $request->torneo;
+
+  $hola = $request->jugadores[0];
+  $aux = count($request->jugadores);
+
+  for ($i = 0; $i < count($request->jugadores); $i++) {
+    $player = new Jugador();
+    $player->nombre = $request->jugadores[$i]['nombre'];
+    $player->edad = $request->jugadores[$i]['edad'];
+    $player->DNI = $request->jugadores[$i]['DNI'];
+
+    $player->save();
   }
 
-  public function add_tournament(Request $request){
-    $nombre = $request->tname;
+  $equipo->save();
+}
 
-    $torneo = new Torneos();
-    $torneo->nombre = $nombre;
-    $torneo->formato = $request->format;
-    $torneo->cantPlayers = $request->maxp;
-    $torneo->cantTeams = $request->teams;
-    $torneo->estado = 'activo';
+/**
+* CREDITOS: https://www.phpro.org/examples/Create-Round-Robin-Using-PHP.html
+* Create a round robin of teams or numbers
+*
+* @param    array    $teams
+* @return    $array
+*
+*/
+private function roundRobin( array $teams ){
 
-
-    $torneo->save();
-
-
-    $this->add_schedule($nombre);
-
-  }
-
-  public function add_teams($tname, $format, $maxp, $teams){
-    return view('add-teams')
-    ->with('tname', $tname)
-    ->with('format', $format)
-    ->with('maxp', $maxp)
-    ->with('teams', $teams);
-  }
-
-  public function add_team_toDB(Request $request){
-    $equipo = new Equipos();
-    $equipo->nombre = $request->nombre;
-    $equipo->GP = $request->GP;
-    $equipo->W = $request->W;
-    $equipo->L = $request->L;
-    $equipo->PF = $request->PF;
-    $equipo->PC = $request->PC;
-    $equipo->Pts = $request->Pts;
-    $equipo->torneo = $request->torneo;
-    $equipo->jugadores = $request->jugadores;
-
-    $this->nombre_torneo = $request->torneo;
-
-    $hola = $request->jugadores[0];
-    $aux = count($request->jugadores);
-
-
-    for ($i = 0; $i < count($request->jugadores); $i++) {
-      $player = new Jugador();
-      $player->nombre = $request->jugadores[$i]['nombre'];
-      $player->edad = $request->jugadores[$i]['edad'];
-      $player->DNI = $request->jugadores[$i]['DNI'];
-
-      $player->save();
-    }
-
-
-    $equipo->save();
-  }
-
-
- /**
- * CREDITOS: https://www.phpro.org/examples/Create-Round-Robin-Using-PHP.html
- * Create a round robin of teams or numbers
- *
- * @param    array    $teams
- * @return    $array
- *
- */
- private function roundRobin( array $teams ){
-
-    $away = array_splice($teams,(count($teams)/2));
-    $home = $teams;
-    for ($i=0; $i < count($home)+count($away)-1; $i++)
+  $away = array_splice($teams,(count($teams)/2));
+  $home = $teams;
+  for ($i=0; $i < count($home)+count($away)-1; $i++)
+  {
+    for ($j=0; $j<count($home); $j++)
     {
-        for ($j=0; $j<count($home); $j++)
-        {
-            $round[$i][$j]["Home"]=$home[$j];
-            $round[$i][$j]["Away"]=$away[$j];
-        }
-        if(count($home)+count($away)-1 > 2)
-        {
-            $s = array_splice( $home, 1, 1 );
-            $slice = array_shift( $s  );
-            array_unshift($away,$slice );
-            array_push( $home, array_pop($away ) );
-        }
+      $round[$i][$j]["Home"]=$home[$j];
+      $round[$i][$j]["Away"]=$away[$j];
     }
-    return $round;
+    if(count($home)+count($away)-1 > 2)
+    {
+      $s = array_splice( $home, 1, 1 );
+      $slice = array_shift( $s  );
+      array_unshift($away,$slice );
+      array_push( $home, array_pop($away ) );
+    }
+  }
+  return $round;
 }
 
 public function editor(){
@@ -171,11 +160,28 @@ public function editor(){
   return view('editor')->with('torneos',$torneos);
 }
 
-public function editor_partidos(Request $request){
-  $id = $request->input('id');
+public function editor_partidos($id){
   $fechas = Fecha::where('torneo', $id)->get();
-  info($fechas);
   return view('editor')->with('fechas',$fechas);
 }
 
+public function edit_match(Request $request){
+  $fechas = Fecha::where('torneo',$request->torneo)
+  //->where('fecha', $request->fecha)
+  ->get();
+
+  info($fechas);
+
+  /*$fecha = $fechas[$request->fecha - 1]['partidos'];
+  $aux;
+  for($i=0; $i < count($fecha); $i++){
+    if($fecha[$i]['local'] === $request->local)
+      if($fecha[$i]['visitante'] === $request->visitante){
+        $aux = $fecha[$i];
+      }
+  }
+
+  info($aux);*/
+
+}
 }
