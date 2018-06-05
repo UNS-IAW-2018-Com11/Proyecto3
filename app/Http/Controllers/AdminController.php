@@ -166,22 +166,31 @@ public function editor_partidos($id){
 }
 
 public function edit_match(Request $request){
-  $fechas = Fecha::where('torneo',$request->torneo)
-  //->where('fecha', $request->fecha)
-  ->get();
+//  $matchThese = ['torneo' => $request->torneo, 'fecha' => intval($request->fecha)];
 
-  info($fechas);
+  $fecha = Fecha::where('torneo',$request->torneo)
+  ->where('fecha', intval($request->fecha))
+  ->first(); //el get() siempre devuelve una colección, por eso nos daba un arreglo de entrada y teniamos que hacer fecha[0] para simplemente tener la unica fecha que devuelve la consulta
+            // ademas, por tener una coleccion no se puede hacer el save despues.
 
-  /*$fecha = $fechas[$request->fecha - 1]['partidos'];
-  $aux;
-  for($i=0; $i < count($fecha); $i++){
-    if($fecha[$i]['local'] === $request->local)
-      if($fecha[$i]['visitante'] === $request->visitante){
-        $aux = $fecha[$i];
+
+  for($i=0; $i < count($fecha->partidos); $i++){
+    if($fecha->partidos[$i]['local'] === $request->local)
+      if($fecha->partidos[$i]['visitante'] === $request->visitante){
+        //original es una variable auxiliar donde se copia todo el arreglo de partidos, ya que los atributos de partidos no se pueden modificar porque eloquent usa un "metodo magico" "__get"
+        //que devuelve una copia del arreglo y no una referencia. Una vez está esa copia en original, la modifico ahí y cambio el atributo 'partidos' de fecha entero sin acceder a sus propios atributos
+
+        $original = $fecha->partidos;
+        $original[$i]['puntosLocal'] = intval($request->puntosLocal);
+        $original[$i]['puntosVisitante'] = intval($request->puntosVisitante);
+        $original[$i]['estado'] = 'finalizado';
+        $fecha->partidos = $original;
+
       }
   }
 
-  info($aux);*/
+      $fecha->save();
+
 
 }
 }
