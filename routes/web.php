@@ -27,21 +27,21 @@ Route::get('/torneos/{id}', 'VisitorController@show_teams')->name('torneo');
 
 Route::get('/team/{id}', 'VisitorController@team_info')->name('team');
 
-Route::get('/admin', 'AdminController@tournament_details')->name('admin');
+Route::get('/admin', 'AdminController@tournament_details')->name('admin')->middleware('TestAdminCredentials');;
 
-Route::get('/admin/new-tournament', 'AdminController@new_tournament')->name('new_tourney');
+Route::get('/admin/new-tournament', 'AdminController@new_tournament')->name('new_tourney')->middleware('TestAdminCredentials');;
 
-Route::get('/admin/{tname}/{format}/{maxp}/{teams}', 'AdminController@add_teams')->name('add_teams');
+Route::get('/admin/{tname}/{format}/{maxp}/{teams}', 'AdminController@add_teams')->name('add_teams')->middleware('TestAdminCredentials');;
 
-Route::get('editor', 'AdminController@editor')->name('editor');
+Route::get('editor', 'AdminController@editor')->name('editor')->middleware('TestEditorCredentials');
 
-Route::get('editor/{id}', 'AdminController@editor_partidos')->name('editor_partidos');
+Route::get('editor/{id}', 'AdminController@editor_partidos')->name('editor_partidos')->middleware('TestEditorCredentials');
 
 Route::post('/add-teams', 'AdminController@add_team_toDB');
 
 Route::post('/add-tournament', 'AdminController@add_tournament');
 
-Route::post('/editor/update', 'AdminController@edit_match');
+Route::post('/editor/update', 'AdminController@edit_match')->middleware('TestEditorCredentials');;
 
 //Auth::routes(); sale de vendor/laravel/framework/src/Illuminate/Router.php, para modificarlo reemplazo las rutas de ahí por esta linea y me queda lo que sigue.
 //No se modifica directamente en Router.php porque es codigo fuente de laravel que si hacemos un composer update en algun momento se sobreescribe todo.

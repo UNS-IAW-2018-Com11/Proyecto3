@@ -50,15 +50,26 @@
 			<button class="btn btn-primary normal-mode" id="toggleButton"
 			type="submit" onclick="toggleMode()">Dark Mode</button>
 
-			@if(!empty($name))
+			@if(!empty($user))
 			<div class="dropdown">
-				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Dropdown button
+				<button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					{{$user->name}}'s profile
 				</button>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item" href="#">Action</a>
-					<a class="dropdown-item" href="#">Another action</a>
-					<a class="dropdown-item" href="#">Something else here</a>
+					@if($user->class === 'admin')
+						<a class="dropdown-item" href="{{route('admin')}}">Admin</a>
+					@endif
+					@if($user->class !== 'visitante')
+						<a class="dropdown-item" href="{{route('editor')}}">Editor</a>
+					@endif
+					<a class="dropdown-item" href="{{route('logout')}}"onclick="event.preventDefault();
+												document.getElementById('logout-form').submit();">
+					 {{ __('Logout') }} <!--q sera esto no?-->
+			 </a>
+
+			 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+					 @csrf
+			 </form>
 				</div>
 			</div>
 

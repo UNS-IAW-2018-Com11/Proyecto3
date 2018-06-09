@@ -18,7 +18,7 @@
 </head>
 <body>
 	<nav class="navbar  navbar-expand-lg fixed-top">
-		<a class="navbar-brand" href="/"> <img src="../images/liga.png"
+		<a class="navbar-brand" href="{{route('index')}}"> <img src="../images/liga.png"
 			width="30" height="30" alt=""> Tournament Generator
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -31,11 +31,11 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active"><a class="nav-link"
-				href="/">Home <span class="sr-only">(current)</span>
+				href="{{route('index')}}">Home <span class="sr-only">(current)</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href=""
 				onclick="alert('Tournament Generator IAW 2018 Beta')">About</a></li>
-				<li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+				<li class="nav-item"><a class="nav-link" href="{{route('contact')}}">Contact</a></li>
 			</ul>
 			<button class="btn btn-primary normal-mode" id="toggleButton"
 			type="submit" onclick="toggleMode()">Dark Mode</button>
@@ -71,27 +71,31 @@
 						@foreach ($fechas as $fecha)
 						<thead>
 							<tr>
-								<th colspan="5">Fecha {{$fecha->fecha}}</th>
+								<th colspan="7">Fecha {{$fecha->fecha}}</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach ($fecha->partidos as $partido)
 							<tr>
 								<td align="left"><a>{{$partido['local']}}
-									@if ($partido['estado'] === "finalizado")
-									{{$partido['puntosLocal']}}
-									@endif
 								</a></td>
+								<td align="center">
+									@if ($partido['estado'] === "finalizado")
+								({{$partido['puntosLocal']}})
+									@endif
+								</td>
 								<td align="center"><input type="number" name="local" max="999"></td>
 								<td align="center">
 									<button type="button" class="btn btn-info"
 									onclick='edit("{{$partido['local']}}","{{$partido['visitante']}}","{{$fecha->torneo}}","{{$fecha->fecha}}")'> Edit</button>
 								</td>
 								<td align="center"><input type="number" name="visitante" max="999"></td>
-								<td align="right"><a>
+								<td align="center">
 									@if ($partido['estado'] === "finalizado")
-									{{$partido['puntosVisitante']}}
+									({{$partido['puntosVisitante']}})
 									@endif
+								</td>
+								<td align="right"><a>
 									{{$partido['visitante']}}</a></td>
 								</tr>
 								@endforeach

@@ -20,7 +20,7 @@
 
 
 	<nav class="navbar  navbar-expand-lg fixed-top">
-		<a class="navbar-brand" href="/"> <img src="images/liga.png"
+		<a class="navbar-brand" href="{{route('index')}}"> <img src="images/liga.png"
 			width="30" height="30" alt=""> Tournament Generator
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -33,11 +33,11 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item active"><a class="nav-link"
-					href="/">Home <span class="sr-only">(current)</span>
+					href="{{route('index')}}">Home <span class="sr-only">(current)</span>
 				</a></li>
 				<li class="nav-item"><a class="nav-link" href=""
 					onclick="alert('Tournament Generator IAW 2018 Beta')">About</a></li>
-				<li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+				<li class="nav-item"><a class="nav-link" href="{{route('contact')}}">Contact</a></li>
 			</ul>
 			<button class="btn btn-primary normal-mode" id="toggleButton"
 				type="submit" onclick="toggleMode()">Dark Mode</button>
