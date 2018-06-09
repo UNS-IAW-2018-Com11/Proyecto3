@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+
+//este AuthenticatesUsers es vendor/laravel/framerwork/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller

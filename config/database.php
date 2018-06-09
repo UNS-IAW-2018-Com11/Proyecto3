@@ -39,7 +39,7 @@ return [
             'prefix' => '',
         ],
 
-        'mysql' => [
+    /*    'mysql' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
@@ -52,7 +52,7 @@ return [
             'prefix' => '',
             'strict' => true,
             'engine' => null,
-        ],
+        ],*/
 
         /*'mongodb' => [
             'driver'   => 'mongodb',
@@ -66,13 +66,13 @@ return [
 
         'mongodb' => [
             'driver'   => 'mongodb',
-            'host'     => env('MONGODB_HOST'),
-            'port'     => env('MONGODB_PORT'),
-            'username' => env('MONGODB_USERNAME'),
-            'password' => env('MONGODB_PASSWORD'),
-            'database' => env('MONGODB_DATABASE'),
+            'host'     => env('DB_HOST'),
+            'port'     => env('DB_PORT'),
+            'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
+            'database' => env('DB_DATABASE'),
             'options' => [
-               'database' =>  env('MONGODB_DATABASE')
+               'database' =>  env('DB_DATABASE')
             ]
         ],
 
