@@ -10,7 +10,6 @@ class User extends Authenticatable{
   protected $collection = 'usersmodels';
 
   protected $fillable = [
-          'name', 'email', 'password'
-      ];
-
+    'name', 'email', 'password', 'class'
+  ];
 }

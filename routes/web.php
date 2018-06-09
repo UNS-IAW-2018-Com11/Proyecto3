@@ -27,7 +27,7 @@ Route::get('/torneos/{id}', 'VisitorController@show_teams')->name('torneo');
 
 Route::get('/team/{id}', 'VisitorController@team_info')->name('team');
 
-//Route::get('/admin', 'AdminController@tournament_details')->name('admin');
+Route::get('/admin', 'AdminController@tournament_details')->name('admin');
 
 Route::get('/admin/new-tournament', 'AdminController@new_tournament')->name('new_tourney');
 
@@ -61,5 +61,5 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
-Route::get('/admin', 'HomeController@index')->name('admin');
+Route::get('/perfil', 'HomeController@index')->name('perfil');
 ?>

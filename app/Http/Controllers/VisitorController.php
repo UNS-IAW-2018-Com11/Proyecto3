@@ -6,11 +6,17 @@ use Illuminate\Http\Request;
 use App\Torneos;
 use App\Equipos;
 use App\Fecha;
+use Auth;
 
 class VisitorController extends Controller{
 
   public function show_torneos(){
     $torneos = Torneos::all();
+    if(!empty(Auth::user())){
+      $name = Auth::user()->name;
+      return view('index')->with('torneos',$torneos)->with('name', $name);
+    }
+
     return view('index')->with('torneos',$torneos);
   }
 
