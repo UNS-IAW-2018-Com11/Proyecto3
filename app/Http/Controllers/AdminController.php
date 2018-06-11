@@ -3,18 +3,24 @@ namespace App\Http\Controllers;
 
 //use Request;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use App\Torneos;
 use App\Equipos;
 use App\Fecha;
 use App\Jugador;
 use App\Partido;
+use App\User;
+use Session;
 
 class AdminController extends Controller{
 
   private $nombre_torneo;
 
   public function tournament_details(){
-    return view('admin');
+    $torneos = Torneos::all();
+    $users = User::where('class','!=','admin')->get();
+
+    return view('admin')->with('torneos', $torneos)->with('users', $users);
   }
 
   public function new_tournament(Request $request){
@@ -29,7 +35,6 @@ class AdminController extends Controller{
   private function add_schedule(&$nombre_torneo){
     $teams = Equipos::where('torneo', $nombre_torneo)->get();
     $equipos = array();
-
 
     for($i = 0;$i < count($teams); $i++){
       array_push($equipos, $teams[$i]->nombre);
@@ -82,6 +87,7 @@ public function add_tournament(Request $request){
   $torneo->cantPlayers = $request->maxp;
   $torneo->cantTeams = $request->teams;
   $torneo->estado = 'activo';
+  $torneo->editores = [];
 
   $torneo->save();
 
@@ -166,31 +172,60 @@ public function editor_partidos($id){
 }
 
 public function edit_match(Request $request){
-//  $matchThese = ['torneo' => $request->torneo, 'fecha' => intval($request->fecha)];
+  //  $matchThese = ['torneo' => $request->torneo, 'fecha' => intval($request->fecha)];
 
   $fecha = Fecha::where('torneo',$request->torneo)
   ->where('fecha', intval($request->fecha))
   ->first(); //el get() siempre devuelve una colección, por eso nos daba un arreglo de entrada y teniamos que hacer fecha[0] para simplemente tener la unica fecha que devuelve la consulta
-            // ademas, por tener una coleccion no se puede hacer el save despues.
+  // ademas, por tener una coleccion no se puede hacer el save despues.
 
 
   for($i=0; $i < count($fecha->partidos); $i++){
     if($fecha->partidos[$i]['local'] === $request->local)
-      if($fecha->partidos[$i]['visitante'] === $request->visitante){
-        //original es una variable auxiliar donde se copia todo el arreglo de partidos, ya que los atributos de partidos no se pueden modificar porque eloquent usa un "metodo magico" "__get"
-        //que devuelve una copia del arreglo y no una referencia. Una vez está esa copia en original, la modifico ahí y cambio el atributo 'partidos' de fecha entero sin acceder a sus propios atributos
+    if($fecha->partidos[$i]['visitante'] === $request->visitante){
+      //original es una variable auxiliar donde se copia todo el arreglo de partidos, ya que los atributos de partidos no se pueden modificar porque eloquent usa un "metodo magico" "__get"
+      //que devuelve una copia del arreglo y no una referencia. Una vez está esa copia en original, la modifico ahí y cambio el atributo 'partidos' de fecha entero sin acceder a sus propios atributos
 
-        $original = $fecha->partidos;
-        $original[$i]['puntosLocal'] = intval($request->puntosLocal);
-        $original[$i]['puntosVisitante'] = intval($request->puntosVisitante);
-        $original[$i]['estado'] = 'finalizado';
-        $fecha->partidos = $original;
+      $original = $fecha->partidos;
+      $original[$i]['puntosLocal'] = intval($request->puntosLocal);
+      $original[$i]['puntosVisitante'] = intval($request->puntosVisitante);
+      $original[$i]['estado'] = 'finalizado';
+      $fecha->partidos = $original;
 
-      }
+    }
   }
 
-      $fecha->save();
-
-
+  $fecha->save();
 }
+
+  public function add_editors(Request $request){
+    $torneo = Torneos::where('nombre', $request->torneo)->first();
+
+    $bandera = false;
+
+    for($i = 0; $i < count($torneo->editores); $i++){
+      if($torneo->editores[$i] === $request->user){
+        $bandera = true;
+        break;
+      }
+    }
+    if($bandera){
+      $torneos = Torneos::all();
+      $users = User::where('class','!=','admin')->get();
+
+      $error = 'User '.$request->user.' is already an editor for the selected tournament.';
+
+      //return redirect('admin')->with('error', $error);
+      //return back()->with('error', "Unable to save country data.!!")->withInput();
+      //return Redirect::back()->withErrors('xD');
+    }
+    else{
+      $original = $torneo->editores;
+      array_push($original, $request->user);
+      $torneo->editores = $original;
+      $torneo->save();
+    }
+
+
+  }
 }
