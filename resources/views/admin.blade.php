@@ -83,29 +83,32 @@
 			</div>
 			<hr>
 			<hr>
-			<hr>
 			<!-- Aca va la parte de agregar usuarios editores-->
 			<div class="container-fluid">
 
+				@if(Session::has('message'))
+					<p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('message') }}</p>
+				@endif
+
 			@foreach ($torneos as $torneo)
 				<h2>{{$torneo->nombre}}</h2>
-				@if (!empty($torneo->editors))
-					@foreach ($torneo->editors as $editor)
-						<h3>{{$editor}}</h3>
-					@endforeach
-				@endif
+
 				@if (!empty($users))
 					<div>
-						<select id="select1">
-							<option value="2" selected="selected">Select user</option>
+						<form method="POST" action="{{route('addEditors')}}">
+							@csrf
+						<select name="user" onchange="this.form.submit();" id="select1">
+							<option selected="selected">Select editor</option>
 							@foreach ($users as $user)
 								<option>{{$user->email}}</option>
 							@endforeach
 						</select>
-						<br/>
-						<button onClick="GetSelectedItem('select1', '{{$torneo->nombre}}');">Get Selected Item</button>
+						<input type="hidden" name="torneo" value='{{$torneo->nombre}}' />
+					</form>
 					</div>
 				@endif
+
+
 				<hr>
 			@endforeach
 		</div><!-- end div de torneos -->

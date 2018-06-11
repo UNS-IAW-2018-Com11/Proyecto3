@@ -198,6 +198,7 @@ public function edit_match(Request $request){
   $fecha->save();
 }
 
+
   public function add_editors(Request $request){
     $torneo = Torneos::where('nombre', $request->torneo)->first();
 
@@ -213,11 +214,13 @@ public function edit_match(Request $request){
       $torneos = Torneos::all();
       $users = User::where('class','!=','admin')->get();
 
-      $error = 'User '.$request->user.' is already an editor for the selected tournament.';
+      $error = "User ".$request->user." is already an editor for the selected tournament.";
 
+      Session::flash('message', $error);
+      Session::flash('alert-class', 'alert-danger');
       //return redirect('admin')->with('error', $error);
-      //return back()->with('error', "Unable to save country data.!!")->withInput();
-      //return Redirect::back()->withErrors('xD');
+      //return back()->with('error', "Una ble to save country data.!!")->withInput();
+      return Redirect::to('admin');
     }
     else{
       $original = $torneo->editores;

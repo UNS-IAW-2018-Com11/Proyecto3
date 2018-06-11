@@ -43,7 +43,7 @@ Route::post('/add-tournament', 'AdminController@add_tournament');
 
 Route::post('/editor/update', 'AdminController@edit_match')->middleware('TestEditorCredentials');;
 
-Route::post('/add-editors', 'AdminController@add_editors');
+Route::post('/add-editors', 'AdminController@add_editors')->name('addEditors');
 //Auth::routes(); sale de vendor/laravel/framework/src/Illuminate/Router.php, para modificarlo reemplazo las rutas de ahí por esta linea y me queda lo que sigue.
 //No se modifica directamente en Router.php porque es codigo fuente de laravel que si hacemos un composer update en algun momento se sobreescribe todo.
 // Authentication Routes...
