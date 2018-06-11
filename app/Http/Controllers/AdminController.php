@@ -223,10 +223,14 @@ public function edit_match(Request $request){
       return Redirect::to('admin');
     }
     else{
+      $mensaje = "User ".$request->user." added as an editor for the selected tournament.";
+      Session::flash('message', $mensaje);
+      Session::flash('alert-class', 'alert-success');
       $original = $torneo->editores;
       array_push($original, $request->user);
       $torneo->editores = $original;
       $torneo->save();
+      return Redirect::to('admin');
     }
 
 
