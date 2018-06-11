@@ -21,11 +21,12 @@ class VisitorController extends Controller{
   }
 
   public function show_teams($id){
-    //print_r(Fecha::all()->where('torneo', "$id"));
     $teams = Equipos::all()->where('torneo', "$id");
     $fechas = Fecha::all()->where('torneo', "$id");
 
-    return view('torneo', compact(['teams','fechas']));
+    $torneo = $id;
+
+    return view('torneo', compact(['teams','fechas','torneo']));
   }
 
   //Info team especifico

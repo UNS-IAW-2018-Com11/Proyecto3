@@ -50,7 +50,7 @@
 						<div class="row">
 							<div class="col-5">
 								<!-- ACA VA LA TABLA DE POSICIONES -->
-								<div style="display: block;">
+										<div style="display: block;">
 									<div class="row">
 										<table class="table table-hover table-condensed border">
 											<thead>
@@ -70,12 +70,18 @@
 												<tr><td>{{$index+1}}</td><td><a href="{{route('team',['id'=>$team->nombre])}}">{{$team->nombre}}</a></td><td>{{$team->GP}}</td><td>{{$team->W}}</td><td>{{$team->L}}</td><td>{{$team->PF}}</td><td>{{$team->PC}}</td><td>{{$team->Pts}}</td></tr>
 												@endforeach
 											</table>
+
+											<div style="overflow: auto;" class="fb-comments" data-href="http://tg-laravel.herokuapp.com/torneos/{{$torneo}}" data-numposts="5"></div>
+									<!--		<div style="overflow:auto;" class="fb-comments" data-href="http://tg-laravel.herokuapp.com/torneos/" data-numposts="5"></div>-->
+
 										</div>
+
 									</div>
+
 								</div>
 
 
-								<div class="col-1"></div>
+							<div class="col-1"></div>
 
 
 								<div class="col-6">
@@ -114,12 +120,12 @@
 
 								</div>
 							</div>
+
 						</div>
 					</div>
 					<div class="col-lg-1 sidenav IAWbanner"></div>
 				</div>
 
-<div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>
 
 				<!-- Optional JavaScript -->
 				<!-- jQuery first, then Popper.js, then Bootstrap JS -->
