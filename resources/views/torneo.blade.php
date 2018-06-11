@@ -15,6 +15,14 @@
 	<title>Tournament creator v3.0</title>
 </head>
 <body>
+	<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v3.0&appId=445760452539949&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 	<nav class="navbar  navbar-expand-lg fixed-top">
 		<a class="navbar-brand" href="{{route('index')}}"> <img src="{{asset('images/liga.png')}}" alt="" width="30" height="30"> Tournament Generator
 		</a>
@@ -110,6 +118,8 @@
 					</div>
 					<div class="col-lg-1 sidenav IAWbanner"></div>
 				</div>
+
+<div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-numposts="5"></div>
 
 				<!-- Optional JavaScript -->
 				<!-- jQuery first, then Popper.js, then Bootstrap JS -->
