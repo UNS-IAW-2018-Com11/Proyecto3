@@ -39,7 +39,7 @@ function inicializarForm() {
 	document.getElementById("teams").value = 2;
 }
 
-function GetSelectedItem(el, torneo){
+/*function GetSelectedItem(el, torneo){
     var e = document.getElementById(el);
     var strSel = e.options[e.selectedIndex].text;
 		if(strSel !== 'Users'){
@@ -67,4 +67,4 @@ function updateEditors(email, tname){
 	// send the collected data as JSON
 	console.log(json);
 	xhr.send(JSON.stringify(json));
-}
+}*/

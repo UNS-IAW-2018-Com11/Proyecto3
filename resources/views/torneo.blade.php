@@ -59,7 +59,7 @@
 											</thead>
 											<tbody id="table-posiciones">
 												@foreach($teams as $index => $team)
-												<tr><td>{{$index+1}}</td><td><a href="{{route('team',['id'=>$team->nombre])}}" onclick="">{{$team->nombre}}</a></td><td>{{$team->GP}}</td><td>{{$team->W}}</td><td>{{$team->L}}</td><td>{{$team->PF}}</td><td>{{$team->PC}}</td><td>{{$team->Pts}}</td></tr>
+												<tr><td>{{$index+1}}</td><td><a href="{{route('team',['id'=>$team->nombre])}}">{{$team->nombre}}</a></td><td>{{$team->GP}}</td><td>{{$team->W}}</td><td>{{$team->L}}</td><td>{{$team->PF}}</td><td>{{$team->PC}}</td><td>{{$team->Pts}}</td></tr>
 												@endforeach
 											</table>
 										</div>
@@ -83,13 +83,13 @@
 											<tbody>
 												@foreach($fecha->partidos as $partido)
 												<tr>
-													<td align="left"><a href="/equipo" onclick="">{{$partido['local']}}
+													<td align="left"><a>{{$partido['local']}}
 														@if($partido['estado'] === "finalizado")
 														({{$partido['puntosLocal']}})
 														@endif
 													</a></td>
 													<td align="center">vs</td>
-													<td align="right"><a href="/equipo" onclick="">
+													<td align="right"><a>
 
 														@if($partido['estado'] === "finalizado")
 														({{$partido['puntosVisitante']}})
