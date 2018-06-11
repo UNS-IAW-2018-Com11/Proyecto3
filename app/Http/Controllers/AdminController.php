@@ -172,13 +172,10 @@ public function editor_partidos($id){
 }
 
 public function edit_match(Request $request){
-  //  $matchThese = ['torneo' => $request->torneo, 'fecha' => intval($request->fecha)];
-
   $fecha = Fecha::where('torneo',$request->torneo)
   ->where('fecha', intval($request->fecha))
   ->first(); //el get() siempre devuelve una colección, por eso nos daba un arreglo de entrada y teniamos que hacer fecha[0] para simplemente tener la unica fecha que devuelve la consulta
   // ademas, por tener una coleccion no se puede hacer el save despues.
-
 
   for($i=0; $i < count($fecha->partidos); $i++){
     if($fecha->partidos[$i]['local'] === $request->local)
@@ -191,11 +188,38 @@ public function edit_match(Request $request){
       $original[$i]['puntosVisitante'] = intval($request->puntosVisitante);
       $original[$i]['estado'] = 'finalizado';
       $fecha->partidos = $original;
-
     }
   }
 
   $fecha->save();
+
+  $local = Equipos::where('nombre', $request->local)->first();
+  $visitante = Equipos::where('nombre', $request->visitante)->first();
+
+  if(!empty($local) && !empty($visitante)){
+    $local->GP = $local->GP + 1;
+    $local-> PF = $local->PF + $request->puntosLocal;
+    $local-> PC = $local->PC + $request->puntosVisitante;
+    $visitante->GP = $visitante->GP + 1;
+    $visitante-> PF = $visitante->PF + $request->puntosVisitante;
+    $visitante-> PC = $visitante->PC + $request->puntosLocal;
+
+    if($request->puntosLocal > $request->puntosVisitante){
+      //gano el equipo local
+      $local->W = $local->W + 1;
+      $local-> Pts = $local-> Pts + 2;
+      $visitante->L = $visitante->L + 1;
+      $visitante->Pts = $visitante->Pts + 1;
+    }else{
+      //gano el visitante
+      $local->L = $local->L + 1;
+      $local-> Pts = $local-> Pts + 1;
+      $visitante->W = $visitante->W + 1;
+      $visitante->Pts = $visitante->Pts + 2;
+    }
+    $local->save();
+    $visitante->save();
+  }
 }
 
 
@@ -218,8 +242,7 @@ public function edit_match(Request $request){
 
       Session::flash('message', $error);
       Session::flash('alert-class', 'alert-danger');
-      //return redirect('admin')->with('error', $error);
-      //return back()->with('error', "Una ble to save country data.!!")->withInput();
+
       return Redirect::to('admin');
     }
     else{
@@ -232,7 +255,5 @@ public function edit_match(Request $request){
       $torneo->save();
       return Redirect::to('admin');
     }
-
-
   }
 }

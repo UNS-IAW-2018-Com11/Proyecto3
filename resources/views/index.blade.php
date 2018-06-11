@@ -105,13 +105,14 @@
 		</div>
 	</div>
 
+	<!--
 	<footer class="footer-basic-centered">
 
 		<p class="footer-company-motto">Organize your tournament for free!</p>
 
 		<p class="footer-company-name">Peratta - Piersigilli &copy; 2018</p>
 
-	</footer>
+	</footer> -->
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

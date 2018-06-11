@@ -86,8 +86,12 @@
 								</td>
 								<td align="center"><input type="number" name="local" max="999"></td>
 								<td align="center">
-									<button type="button" class="btn btn-info"
-									onclick='edit("{{$partido['local']}}","{{$partido['visitante']}}","{{$fecha->torneo}}","{{$fecha->fecha}}")'> Edit</button>
+									@if ($partido['estado'] !== "finalizado")
+										<button type="button" class="btn btn-info"
+										onclick='edit("{{$partido['local']}}","{{$partido['visitante']}}","{{$fecha->torneo}}","{{$fecha->fecha}}")'> Edit</button>
+									@else
+										<p>Match has already ended.</p>
+									@endif
 								</td>
 								<td align="center"><input type="number" name="visitante" max="999"></td>
 								<td align="center">
