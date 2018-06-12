@@ -13,6 +13,7 @@
 	crossorigin="anonymous">
 
 	<link rel="stylesheet" type="text/css" href = "{{ asset('css/estilo.css') }}">
+	<!--		<script src="{{ asset('js/toggleMode.js') }}"></script>-->
 
 	<title>Tournament creator v3.0</title>
 </head>
@@ -45,7 +46,7 @@
 
 			</ul>
 			<button class="btn btn-primary normal-mode" id="toggleButton"
-			type="submit" onclick="toggleMode()">Dark Mode</button>
+			type="submit" onclick="toggleMode();">Dark Mode</button>
 
 			@if(!empty($user))
 			<div class="dropdown">
@@ -125,7 +126,7 @@
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
 
-	<!-- <script src="{{asset('js/toggleMode.js')}}"></script>  -->
+	<!-- <script src="{{asset('js/toggleMode.js')}}"></script> -->
 
 </body>
 </html>

@@ -12,6 +12,7 @@
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/estilo.css')}}">
+	<!--<script src="{{ asset('js/toggleMode.js') }}"></script>-->
 	<title>Tournament creator v3.0</title>
 </head>
 <body>
@@ -71,7 +72,7 @@
 												@endforeach
 											</table>
 
-											<div style="overflow: auto;" class="fb-comments" data-href="http://tg-laravel.herokuapp.com/torneos/{{$torneo}}" data-numposts="5"></div>
+		<div style="overflow: auto;" class="fb-comments" data-href="http://tg-laravel.herokuapp.com/torneos/{{$torneo}}" data-numposts="5"></div>
 									<!--		<div style="overflow:auto;" class="fb-comments" data-href="http://tg-laravel.herokuapp.com/torneos/" data-numposts="5"></div>-->
 
 										</div>
