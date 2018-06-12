@@ -13,9 +13,6 @@
 	crossorigin="anonymous">
 
 	<link rel="stylesheet" type="text/css" href = "{{ asset('css/estilo.css') }}">
-	<link rel="stylesheet" type="text/css"
-	href="stylesheets/footer-basic-centered.css">
-	<link rel="stylesheet" type="text/css" href="{{ asset('css/demo.css') }}">
 
 	<title>Tournament creator v3.0</title>
 </head>
@@ -128,7 +125,7 @@
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
 
-	<!--	<script src="../javascripts/toggleMode.js"></script> -->
+	<script src="{{asset('js/toggleMode.js')}}"></script>
 
 </body>
 </html>

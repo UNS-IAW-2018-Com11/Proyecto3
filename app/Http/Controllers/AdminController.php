@@ -10,6 +10,7 @@ use App\Fecha;
 use App\Jugador;
 use App\Partido;
 use App\User;
+use Auth;
 use Session;
 
 class AdminController extends Controller{
@@ -162,8 +163,26 @@ private function roundRobin( array $teams ){
 }
 
 public function editor(){
-  $torneos = Torneos::all();
-  return view('editor')->with('torneos',$torneos);
+  $user = Auth::user();
+  if($user->class === 'admin'){
+    $torneos = Torneos::all();
+    return view('editor')->with('torneos',$torneos);
+  }
+  if($user->class === 'editor'){
+    $torneos = Torneos::all();
+    $torneos_array = [];
+
+    foreach ($torneos as $item) {
+      for($i = 0; $i < count($item->editores); $i++){
+        if($item->editores[$i] === $user->email){
+          //el user es editor de dicho torneo
+          array_push($torneos_array, $item);
+        }
+      }
+    }
+    return view('editor')->with('torneos',$torneos_array);
+  }
+
 }
 
 public function editor_partidos($id){
@@ -222,7 +241,6 @@ public function edit_match(Request $request){
   }
 }
 
-
   public function add_editors(Request $request){
     $torneo = Torneos::where('nombre', $request->torneo)->first();
 
@@ -242,10 +260,13 @@ public function edit_match(Request $request){
 
       Session::flash('message', $error);
       Session::flash('alert-class', 'alert-danger');
-
       return Redirect::to('admin');
     }
     else{
+      $user = User::where('email', $request->user)->first();
+      $user->class = 'editor';
+      $user->save();
+
       $mensaje = "User ".$request->user." added as an editor for the selected tournament.";
       Session::flash('message', $mensaje);
       Session::flash('alert-class', 'alert-success');
