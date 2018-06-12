@@ -21,9 +21,8 @@ class VisitorController extends Controller{
   }
 
   public function show_teams($id){
-    $teams = Equipos::all()->where('torneo', "$id");
+    $teams = Equipos::all()->where('torneo', "$id")->sortByDesc('Pts');
     $fechas = Fecha::all()->where('torneo', "$id");
-
     $torneo = $id;
 
     return view('torneo', compact(['teams','fechas','torneo']));
