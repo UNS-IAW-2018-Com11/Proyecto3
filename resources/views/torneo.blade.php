@@ -12,7 +12,7 @@
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
 	crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css" href="{{asset('css/estilo.css')}}">
-	<script src="{{ asset('js/toggleMode.js') }}"></script>
+	<!--<script src="{{ asset('js/toggleMode.js') }}"></script>-->
 	<title>Tournament creator v3.0</title>
 </head>
 <body>

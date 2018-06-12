@@ -15,7 +15,7 @@
 	<link rel="stylesheet" type="text/css"
 	href="{{ asset('css/footer-basic-centered.css') }}"
 <link rel="stylesheet" type="text/css" href="{{ asset('css/demo.css') }}">
-		<script src="{{ asset('js/toggleMode.js') }}"></script>
+<!--		<script src="{{ asset('js/toggleMode.js') }}"></script>-->
 <title>Tournament creator v3.0</title>
 </head>
 <body>
