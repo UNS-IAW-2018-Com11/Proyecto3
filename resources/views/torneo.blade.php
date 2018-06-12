@@ -56,7 +56,6 @@
 										<table class="table table-hover table-condensed border">
 											<thead>
 												<tr>
-													<th>#</th>
 													<th>Team</th>
 													<th>GP</th>
 													<th>W</th>
@@ -67,8 +66,8 @@
 												</tr>
 											</thead>
 											<tbody id="table-posiciones">
-												@foreach($teams as $index => $team)
-												<tr><td>{{$index+1}}</td><td><a href="{{route('team',['id'=>$team->nombre])}}">{{$team->nombre}}</a></td><td>{{$team->GP}}</td><td>{{$team->W}}</td><td>{{$team->L}}</td><td>{{$team->PF}}</td><td>{{$team->PC}}</td><td>{{$team->Pts}}</td></tr>
+												@foreach($teams as $team)
+												<tr><td><a href="{{route('team',['id'=>$team->nombre])}}">{{$team->nombre}}</a></td><td>{{$team->GP}}</td><td>{{$team->W}}</td><td>{{$team->L}}</td><td>{{$team->PF}}</td><td>{{$team->PC}}</td><td>{{$team->Pts}}</td></tr>
 												@endforeach
 											</table>
 
