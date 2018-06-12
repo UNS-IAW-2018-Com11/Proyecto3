@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css"
 	href="{{ asset('css/footer-basic-centered.css') }}"
 <link rel="stylesheet" type="text/css" href="{{ asset('css/demo.css') }}">
+		<script src="{{ asset('js/toggleMode.js') }}"></script>
 <title>Tournament creator v3.0</title>
 </head>
 <body>
@@ -95,6 +96,6 @@
 			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 			crossorigin="anonymous"></script>
-	<!--	<script src="javascripts/toggleMode.js"></script> -->
+
 </body>
 </html>
