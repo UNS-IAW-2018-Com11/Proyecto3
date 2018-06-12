@@ -32,13 +32,11 @@ class VisitorController extends Controller{
   //Info team especifico
   public function team_info($id){
     $team = Equipos::all()->where('nombre',"$id")->first();
-    //print_r($team);
     return view('team', compact(['team']));
   }
 
   public function contact(){
     return view('contact');
   }
-
 }
 ?>

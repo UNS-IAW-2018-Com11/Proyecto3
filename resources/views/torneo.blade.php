@@ -66,7 +66,7 @@
 												</tr>
 											</thead>
 											<tbody id="table-posiciones">
-												@foreach($teams as $index => $team)
+												@foreach($teams->sortByDesc('Pts') as $index => $team)
 												<tr><td>{{$index+1}}</td><td><a href="{{route('team',['id'=>$team->nombre])}}">{{$team->nombre}}</a></td><td>{{$team->GP}}</td><td>{{$team->W}}</td><td>{{$team->L}}</td><td>{{$team->PF}}</td><td>{{$team->PC}}</td><td>{{$team->Pts}}</td></tr>
 												@endforeach
 											</table>
