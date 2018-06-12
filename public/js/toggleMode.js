@@ -1,7 +1,3 @@
-/**
- *
- */
-
 window.addEventListener("load", checkMode(), false);
 
 function checkMode() {
@@ -18,11 +14,13 @@ function checkMode() {
 		file = "{{asset('css/estilo.css')}}";
 		estilo = "classic";
 	} else {
-		console.log("estilo NOT null");
 		if (estilo === "classic") {
-			file = "{{asset('css/estilo.css')}}";
+			console.log("entre");
+			//file = "{{asset('css/estilo.css')}}";
+			file = "../public/css/estilo.css";
 		} else {
-			file = "{{asset('css/estilo-alt.css')}}";
+			//file = "{{asset('css/estilo-alt.css')}}";
+			file = "../public/css/estilo-alt.css";
 		}
 	}
 
@@ -62,8 +60,10 @@ function toggleMode() {
 	newlink.setAttribute("rel", "stylesheet");
 	newlink.setAttribute("type", "text/css");
 
-	var file = localStorage.getItem("estilo") === "classic" ? "{{asset('css/estilo.css')}}"
-			: "{{asset('css/estilo-alt.css')}}";
+	//var file = localStorage.getItem("estilo") === "classic" ? "{{asset('css/estilo.css')}}"
+		//	: "{{asset('css/estilo-alt.css')}}";
+	var file = localStorage.getItem("estilo") === "classic" ? "../public/css/estilo.css"
+			: "../public/css/estilo-alt.css";
 
 	newlink.setAttribute("href", file);
 	document.getElementsByTagName("head").item(0)

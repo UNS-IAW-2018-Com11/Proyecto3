@@ -125,7 +125,7 @@
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
 
-	<!-- <script src="{{asset('js/toggleMode.js')}}"></script> -->
+	<script src="{{asset('js/toggleMode.js')}}"></script>
 
 </body>
 </html>
