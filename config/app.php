@@ -162,7 +162,6 @@ return [
 
         //provider para MongoDB
         Jenssegers\Mongodb\MongodbServiceProvider::class,
-
     ],
 
     /*
