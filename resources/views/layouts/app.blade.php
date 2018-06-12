@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Tournament Generator</title>
+    <title>Tournament Generator v3.0</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

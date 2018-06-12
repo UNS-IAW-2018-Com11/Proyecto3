@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css"
 	href="{{asset('css/footer-basic-centered.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('css/demo.css')}}">
-<title>Tournament creator v1.0</title>
+<title>Tournament creator v3.0</title>
 </head>
 <body>
 	<nav class="navbar  navbar-expand-lg fixed-top">

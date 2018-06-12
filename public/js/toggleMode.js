@@ -13,10 +13,12 @@ function checkMode() {
 	var estilo = localStorage.getItem("estilo");
 	var file;
 	if (estilo === null) {
+		console.log("estilo null");
 		localStorage.setItem("estilo", "classic");
 		file = "{{asset('css/estilo.css')}}";
 		estilo = "classic";
 	} else {
+		console.log("estilo NOT null");
 		if (estilo === "classic") {
 			file = "{{asset('css/estilo.css')}}";
 		} else {
