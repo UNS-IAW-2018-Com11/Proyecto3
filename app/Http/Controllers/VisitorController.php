@@ -25,12 +25,23 @@ class VisitorController extends Controller{
     $fechas = Fecha::all()->where('torneo', "$id");
     $torneo = $id;
 
+    if(!empty(Auth::user())){
+      $user = Auth::user();
+      return view('torneo', compact(['teams','fechas','torneo','user']));
+    }
+
     return view('torneo', compact(['teams','fechas','torneo']));
   }
 
   //Info team especifico
   public function team_info($id){
     $team = Equipos::all()->where('nombre',"$id")->first();
+
+    if(!empty(Auth::user())){
+      $user = Auth::user();
+      return view('team', compact(['team','user']));
+    }
+    
     return view('team', compact(['team']));
   }
 
