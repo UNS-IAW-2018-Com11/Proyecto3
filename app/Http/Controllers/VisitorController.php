@@ -46,6 +46,11 @@ class VisitorController extends Controller{
   }
 
   public function contact(){
+
+    if(!empty(Auth::user())){
+      $user = Auth::user();
+      return view('contact', compact(['user']));
+    }
     return view('contact');
   }
 
