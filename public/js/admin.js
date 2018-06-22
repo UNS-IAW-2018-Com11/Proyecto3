@@ -34,12 +34,10 @@ function increaseby2() {
 		document.getElementById("teams").value = num;
 }
 
-function inicializarForm() {
-	if(document.getElementById("maxp")!=null && document.getElementById("teams")!=null){
+$(document).ready(function(){
 		document.getElementById("maxp").value = 5;
 		document.getElementById("teams").value = 2;
-	}
-}
+	});
 
 /*function GetSelectedItem(el, torneo){
     var e = document.getElementById(el);

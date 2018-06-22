@@ -37,6 +37,8 @@ Route::get('editor', 'AdminController@editor')->name('editor')->middleware('Test
 
 Route::get('editor/{id}', 'AdminController@editor_partidos')->name('editor_partidos')->middleware('TestEditorCredentials');
 
+Route::get('/videos', 'VisitorController@show_videos')->name('youtube');
+
 Route::post('/add-teams', 'AdminController@add_team_toDB');
 
 Route::post('/add-tournament', 'AdminController@add_tournament');

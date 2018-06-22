@@ -41,12 +41,23 @@ class VisitorController extends Controller{
       $user = Auth::user();
       return view('team', compact(['team','user']));
     }
-    
+
     return view('team', compact(['team']));
   }
 
   public function contact(){
     return view('contact');
   }
+
+  public function show_videos(){
+
+    if(!empty(Auth::user())){
+      $user = Auth::user();
+      return view('videos', compact(['user']));
+    }
+
+    return view('videos');
+  }
+
 }
 ?>
