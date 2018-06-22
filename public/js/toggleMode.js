@@ -16,17 +16,20 @@ function checkMode() {
 	if (estilo === null) {
 		console.log("estilo null");
 		localStorage.setItem("estilo", "classic");
-		file = "../public/css/estilo.css";
-	//	file = "{{asset('css/estilo.css')}}";
+		  file = "{{asset('css/estilo.css')}}";
+  //  file = "../public/css/estilo.css"
+  //	file = "https://localhost/Proyecto3/public/css/estilo.css";
 		estilo = "classic";
 	} else {
 		if (estilo === "classic") {
 			console.log("entre");
-			//file = "{{asset('css/estilo.css')}}";
-			file = "../public/css/estilo.css";
+			file = "{{asset('css/estilo.css')}}";
+      //file = "../public/css/estilo.css"
+			//file = "https://localhost/Proyecto3/public/css/estilo.css";
 		} else {
-			//file = "{{asset('css/estilo-alt.css')}}";
-			file = "../public/css/estilo-alt.css";
+			file = "{{asset('css/estilo-alt.css')}}";
+      //file = "../public/css/estilo-alt.css"
+      //file = "https://localhost/Proyecto3/public/css/estilo-alt.css"
 		}
 	}
 
@@ -39,7 +42,7 @@ function checkMode() {
 	}
 
 	newlink.setAttribute("href", file);
-	console.log(newlink);
+	console.log("XD",newlink);
 	document.getElementsByTagName("head").item(0)
 			.replaceChild(newlink, oldlink);
 }
@@ -73,8 +76,8 @@ function toggleMode() {
 
 	//var file = localStorage.getItem("estilo") === "classic" ? "{{asset('css/estilo.css')}}"
 		//	: "{{asset('css/estilo-alt.css')}}";
-	var file = localStorage.getItem("estilo") === "classic" ? "../public/css/estilo.css"
-			: "../public/css/estilo-alt.css";
+	var file = localStorage.getItem("estilo") === "classic" ? "{{asset('css/estilo.css')}}"
+			: "{{asset('css/estilo-alt.css')}}";
 
 	newlink.setAttribute("href", file);
 	console.log(newlink);
