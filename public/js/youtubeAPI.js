@@ -9,13 +9,13 @@ $(document).ready(function(){
             function(data){
                     $.each(data.items,function(i,item){
                     var videosSubidos = item.contentDetails.relatedPlaylists.uploads;
-                    getVids(videosSubidos);
+                    getLatestVideos(videosSubidos);
             });
         }
     );
 });
 
-function getVids(videosSubidos){
+function getLatestVideos(videosSubidos){
   var videowidth = '700';
   var videoheight= '400';
   var cantVideos = 5;
