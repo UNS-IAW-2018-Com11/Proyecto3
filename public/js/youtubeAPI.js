@@ -31,7 +31,7 @@ function getVids(videosSubidos){
                 $.each(data.items,function(i,item){
                     title = item.snippet.title;
                     videoId = item.snippet.resourceId.videoId;
-                    output = '<div align="center"><iframe height="'+videoheight+'" width="'+videowidth+'"src=\"//www.youtube.com/embed/'+videoId+'\"></iframe></div>';
+                    output = '<div align="center"><iframe height="'+videoheight+'" width="'+videowidth+'"src=\"//www.youtube.com/embed/'+videoId+'\"></iframe></div><hr>';
                     $('#videos').append(output);
                 });
             }

@@ -19,9 +19,13 @@ class AdminController extends Controller{
 
   public function tournament_details(){
     $torneos = Torneos::all();
-    $users = User::where('class','!=','admin')->get();
+    $usuarios = User::where('class','!=','admin')->get();
 
-    return view('admin')->with('torneos', $torneos)->with('users', $users);
+    if(!empty(Auth::user())){
+        $name = Auth::user();
+        return view('admin')->with('torneos',$torneos)->with('user', $name)->with('usuarios',$usuarios);
+      }
+    return view('admin')->with('torneos', $torneos)->with('usuarios', $usuarios);
   }
 
   public function new_tournament(Request $request){
@@ -166,7 +170,7 @@ public function editor(){
   $user = Auth::user();
   if($user->class === 'admin'){
     $torneos = Torneos::all();
-    return view('editor')->with('torneos',$torneos);
+    return view('editor')->with('torneos',$torneos)->with('user',$user);
   }
   if($user->class === 'editor'){
     $torneos = Torneos::all();
@@ -180,7 +184,7 @@ public function editor(){
         }
       }
     }
-    return view('editor')->with('torneos',$torneos_array);
+    return view('editor')->with('torneos',$torneos_array)->with('user',$user);
   }
 
 }

@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+
 @section('body')
 	<div class="container-fluid">
 		<div class="row content">
@@ -52,14 +53,14 @@
 			@foreach ($torneos as $torneo)
 				<h2>{{$torneo->nombre}}</h2>
 
-				@if (!empty($users))
+				@if (!empty($usuarios))
 					<div>
 						<form method="POST" action="{{route('addEditors')}}">
 							@csrf
 						<select name="user" onchange="this.form.submit();" id="select1">
 							<option selected="selected">Select editor</option>
-							@foreach ($users as $user)
-								<option>{{$user->email}}</option>
+							@foreach ($usuarios as $usuario)
+								<option>{{$usuario->email}}</option>
 							@endforeach
 						</select>
 						<input type="hidden" name="torneo" value='{{$torneo->nombre}}' />
