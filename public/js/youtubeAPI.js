@@ -1,39 +1,38 @@
-var channelName = 'ILoveBasketballTV';
-var vidWidth = '700';
-var vidHeight= '400';
-var results = 5;
-
 
 $(document).ready(function(){
+  var canal = 'ILoveBasketballTV';
     $.get(
         "https://www.googleapis.com/youtube/v3/channels", {
             part:'contentDetails',
-            forUsername:channelName,
+            forUsername:canal,
             key:'AIzaSyBEh9gxvkMkF_SkSQcHNZAIuz2HeWVenvo'},
             function(data){
                     $.each(data.items,function(i,item){
-                    var pid = item.contentDetails.relatedPlaylists.uploads;
-                    getVids(pid);
+                    var videosSubidos = item.contentDetails.relatedPlaylists.uploads;
+                    getVids(videosSubidos);
             });
         }
     );
 });
 
-function getVids(pid){
+function getVids(videosSubidos){
+  var videowidth = '700';
+  var videoheight= '400';
+  var cantVideos = 5;
     $.get(
         "https://www.googleapis.com/youtube/v3/playlistItems", {
             part:'snippet',
             fields:'items/snippet(title,resourceId)',
-            maxResults:results,
-            playlistId: pid,
+            maxResults:cantVideos,
+            playlistId: videosSubidos,
             key:'AIzaSyBEh9gxvkMkF_SkSQcHNZAIuz2HeWVenvo'},
             function(data){
                 var output;
                 $.each(data.items,function(i,item){
                     title = item.snippet.title;
                     videoId = item.snippet.resourceId.videoId;
-                    output = '<li><iframe height="'+vidHeight+'" width="'+vidWidth+'"src=\"//www.youtube.com/embed/'+videoId+'\"></iframe></li>';
-                    $('#results').append(output);
+                    output = '<div align="center"><iframe height="'+videoheight+'" width="'+videowidth+'"src=\"//www.youtube.com/embed/'+videoId+'\"></iframe></div>';
+                    $('#videos').append(output);
                 });
             }
          );

@@ -40,6 +40,7 @@
 			<li class="nav-item"><a class="nav-link" href=""
 				onclick="alert('Tournament Generator IAW 2018 Beta')">About</a></li>
 				<li class="nav-item"><a class="nav-link" href="{{route('contact')}}">Contact</a></li>
+				<li class="nav-item"><a class="nav-link" href="{{route('youtube')}}">Improve your technique!!</a></li>
 
 			</ul>
 			<button class="btn btn-primary normal-mode" id="toggleButton"
