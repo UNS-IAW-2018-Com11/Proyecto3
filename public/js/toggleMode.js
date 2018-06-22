@@ -3,8 +3,8 @@ window.onload = function() {
 }
 
 function checkMode() {
-  var estiloriginal = window.location.protocol + "//" + window.location.host + "/Proyecto3/public/css/estilo.css";
-  var estiloalternativo = window.location.protocol + "//" + window.location.host + "/Proyecto3/public/css/estilo-alt.css";
+  var estiloriginal = window.location.protocol + "//" + window.location.host + "/css/estilo.css";
+  var estiloalternativo = window.location.protocol + "//" + window.location.host + "/css/estilo-alt.css";
 
 	var oldlink = document.getElementsByTagName("link").item(1);// SIEMPRE ES 1
 	var newlink = document.createElement("link");
@@ -51,8 +51,8 @@ function checkMode() {
 }
 
 function toggleMode() {
-  var estiloriginal = window.location.protocol + "//" + window.location.host + "/Proyecto3/public/css/estilo.css";
-  var estiloalternativo = window.location.protocol + "//" + window.location.host + "/Proyecto3/public/css/estilo-alt.css";
+  var estiloriginal = window.location.protocol + "//" + window.location.host + "/css/estilo.css";
+  var estiloalternativo = window.location.protocol + "//" + window.location.host + "/css/estilo-alt.css";
 
 	var estilo = localStorage.getItem("estilo");
 	var toggleButton = document.getElementById("toggleButton");
