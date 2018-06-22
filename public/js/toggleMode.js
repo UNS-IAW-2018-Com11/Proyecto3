@@ -3,9 +3,10 @@ window.onload = function() {
 }
 
 function checkMode() {
-	console.log("hola");
+  var estiloriginal = window.location.protocol + "//" + window.location.host + "/Proyecto3/public/css/estilo.css";
+  var estiloalternativo = window.location.protocol + "//" + window.location.host + "/Proyecto3/public/css/estilo-alt.css";
+
 	var oldlink = document.getElementsByTagName("link").item(1);// SIEMPRE ES 1
-	console.log(oldlink);
 	var newlink = document.createElement("link");
 	newlink.setAttribute("rel", "stylesheet");
 	newlink.setAttribute("type", "text/css");
@@ -17,19 +18,21 @@ function checkMode() {
 		console.log("estilo null");
 		localStorage.setItem("estilo", "classic");
 	//	  file = "{{asset('css/estilo.css')}}";
-    file = "../public/css/estilo.css"
+    file = estiloriginal;
   //	file = "https://localhost/Proyecto3/public/css/estilo.css";
 		estilo = "classic";
 	} else {
 		if (estilo === "classic") {
 			console.log("entre");
 			//file = "{{asset('css/estilo.css')}}";
-      file = "../public/css/estilo.css"
+      //file = "../../public/css/estilo.css"
 			//file = "https://localhost/Proyecto3/public/css/estilo.css";
+      file = estiloriginal;
 		} else {
 			//file = "{{asset('css/estilo-alt.css')}}";
-      file = "../public/css/estilo-alt.css"
+      //file = "../../public/css/estilo-alt.css"
       //file = "https://localhost/Proyecto3/public/css/estilo-alt.css"
+      file = estiloalternativo;
 		}
 	}
 
@@ -48,6 +51,8 @@ function checkMode() {
 }
 
 function toggleMode() {
+  var estiloriginal = window.location.protocol + "//" + window.location.host + "/Proyecto3/public/css/estilo.css";
+  var estiloalternativo = window.location.protocol + "//" + window.location.host + "/Proyecto3/public/css/estilo-alt.css";
 
 	var estilo = localStorage.getItem("estilo");
 	var toggleButton = document.getElementById("toggleButton");
@@ -76,8 +81,8 @@ function toggleMode() {
 
 	//var file = localStorage.getItem("estilo") === "classic" ? "{{asset('css/estilo.css')}}"
 		//	: "{{asset('css/estilo-alt.css')}}";
-	var file = localStorage.getItem("estilo") === "classic" ? "../public/css/estilo.css"
-			: "../public/css/estilo-alt.css";
+	var file = localStorage.getItem("estilo") === "classic" ? estiloriginal
+			: estiloalternativo;
 
 	newlink.setAttribute("href", file);
 	console.log(newlink);
