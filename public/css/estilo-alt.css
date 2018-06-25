@@ -26,6 +26,10 @@ nav {
 
 }
 
+.dropdown-menu{
+	background-color: #add8e6;
+}
+
 .navbar a:hover {
   border-bottom: 3px solid white;
 }
@@ -43,7 +47,7 @@ nav {
 
 .list-group-item.torneos{
 	background-color: #B8B8B8;
-	
+
 }
 
 .row {
