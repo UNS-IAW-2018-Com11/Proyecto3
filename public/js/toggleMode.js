@@ -15,7 +15,7 @@ function checkMode() {
 	var estilo = localStorage.getItem("estilo");
 	var file;
 	if (estilo === null) {
-		console.log("estilo null");
+
 		localStorage.setItem("estilo", "classic");
 	//	  file = "{{asset('css/estilo.css')}}";
     file = estiloriginal;
@@ -23,7 +23,7 @@ function checkMode() {
 		estilo = "classic";
 	} else {
 		if (estilo === "classic") {
-			console.log("entre");
+
 			//file = "{{asset('css/estilo.css')}}";
       //file = "../../public/css/estilo.css"
 			//file = "https://localhost/Proyecto3/public/css/estilo.css";
@@ -37,7 +37,7 @@ function checkMode() {
 	}
 
 	var toggleButton = document.getElementById("toggleButton");
-	console.log(toggleButton);
+
 	if (estilo === "classic") {
 		toggleButton.innerHTML = "Dark Mode";
 	} else {
@@ -45,7 +45,7 @@ function checkMode() {
 	}
 
 	newlink.setAttribute("href", file);
-	console.log("XD",newlink);
+
 	document.getElementsByTagName("head").item(0)
 			.replaceChild(newlink, oldlink);
 }
@@ -58,16 +58,16 @@ function toggleMode() {
 	var toggleButton = document.getElementById("toggleButton");
 
 	if (estilo === null) {
-		console.log("hola");
+
 		localStorage.setItem("estilo", "dark");
 		toggleButton.innerHTML = "Classic Mode";
 	} else {
 		if (estilo === "classic") {
-				console.log("hola1");
+
 			toggleButton.innerHTML = "Classic Mode";
 			localStorage.setItem("estilo", "dark");
 		} else {
-				console.log("hola2");
+
 			toggleButton.innerHTML = "Dark Mode";
 			localStorage.setItem("estilo", "classic");
 		}
@@ -85,7 +85,7 @@ function toggleMode() {
 			: estiloalternativo;
 
 	newlink.setAttribute("href", file);
-	console.log(newlink);
+
 
 	document.getElementsByTagName("head").item(0)
 			.replaceChild(newlink, oldlink);

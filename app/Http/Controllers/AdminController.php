@@ -100,11 +100,13 @@ public function add_tournament(Request $request){
 }
 
 public function add_teams($tname, $format, $maxp, $teams){
+  $user = Auth::user();
   return view('add-teams')
   ->with('tname', $tname)
   ->with('format', $format)
   ->with('maxp', $maxp)
-  ->with('teams', $teams);
+  ->with('teams', $teams)
+  ->with('user',$user);
 }
 
 public function add_team_toDB(Request $request){
@@ -191,6 +193,11 @@ public function editor(){
 
 public function editor_partidos($id){
   $fechas = Fecha::where('torneo', $id)->get();
+  $user = Auth::user();
+  if($user->class === 'editor' || $user->class === 'admin'){
+    return view('editor')->with('fechas',$fechas)->with('user',$user);
+  }
+
   return view('editor')->with('fechas',$fechas);
 }
 
@@ -243,6 +250,9 @@ public function edit_match(Request $request){
     $local->save();
     $visitante->save();
   }
+
+  return back();
+
 }
 
   public function add_editors(Request $request){
